@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserService } from 'src/users/users.service';
+import fetch from 'node-fetch';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -23,12 +24,17 @@ export class JwtAuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException('No token provided!');
     }
+
+    const url = 'https://api.clickup.com/api/v2/user';
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     try {
-      const response = await fetch('https://api.clickup.com/api/v2/user', {
+      const response = await fetch(url, {
         method: 'GET',
-        headers: {
-          Authorization: token,
-        },
+        headers,
       });
 
       const { user } = await response.json();
