@@ -33,6 +33,8 @@ export class JwtAuthGuard implements CanActivate {
     try {
       const { user } = await this.userService.fetch(url, headers);
 
+      console.log(user);
+
       request['user'] = {
         user,
         accessToken: token,
