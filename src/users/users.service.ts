@@ -21,4 +21,8 @@ export class UserService {
   async update(id: number, user: Partial<User>): Promise<void> {
     await this.userRepository.update(id, user);
   }
+
+  async fetch(url: string, headers: any): Promise<any> {
+    return fetch(url, { headers });
+  }
 }

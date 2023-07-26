@@ -8,7 +8,6 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserService } from 'src/users/users.service';
-import fetch from 'node-fetch';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -32,10 +31,7 @@ export class JwtAuthGuard implements CanActivate {
     };
 
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers,
-      });
+      const response = await this.userService.fetch(url, headers);
 
       const { user } = await response.json();
 
