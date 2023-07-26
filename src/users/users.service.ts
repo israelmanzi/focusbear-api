@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import axios from 'axios';
 
 @Injectable()
 export class UserService {
@@ -23,6 +24,8 @@ export class UserService {
   }
 
   async fetch(url: string, headers: any): Promise<any> {
-    return fetch(url, { headers });
+    return await axios.get(url, {
+      headers: headers,
+    });
   }
 }

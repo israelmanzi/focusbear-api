@@ -31,9 +31,7 @@ export class JwtAuthGuard implements CanActivate {
     };
 
     try {
-      const response = await this.userService.fetch(url, headers);
-
-      const { user } = await response.json();
+      const { user } = await this.userService.fetch(url, headers);
 
       request['user'] = {
         user,
