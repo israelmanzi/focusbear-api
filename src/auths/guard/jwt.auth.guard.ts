@@ -21,7 +21,7 @@ export class JwtAuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('No token provided!');
     }
     try {
       const response = await fetch('https://api.clickup.com/api/v2/user', {
@@ -38,7 +38,7 @@ export class JwtAuthGuard implements CanActivate {
         accessToken: token,
       };
     } catch {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid token!');
     }
     return true;
   }
