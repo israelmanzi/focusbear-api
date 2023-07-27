@@ -24,8 +24,10 @@ export class UserService {
   }
 
   async fetch(url: string, headers: any): Promise<any> {
-    return await axios.get(url, {
-      headers: headers,
-    });
+    return await axios
+      .get(url, {
+        headers: headers,
+      })
+      .then((res) => res.data);
   }
 }

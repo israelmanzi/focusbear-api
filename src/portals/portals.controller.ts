@@ -6,6 +6,12 @@ import { JwtAuthGuard } from 'src/auths/guard/jwt.auth.guard';
 export class PortalsController {
   constructor(private readonly portalsService: PortalsService) {}
 
+  @Get('test')
+  @UseGuards(JwtAuthGuard)
+  async test(@Req() req) {
+    return req.user;
+  }
+
   @Get('workspaces/all')
   @UseGuards(JwtAuthGuard)
   async getAllWorkspaces(@Req() req) {
