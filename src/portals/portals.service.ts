@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 
 @Injectable()
 export class PortalsService {
@@ -11,13 +12,6 @@ export class PortalsService {
       Authorization: `Bearer ${user.accessToken}`,
     };
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers,
-    });
-
-    const data = await response.json();
-
-    return data;
+    return axios.get(url, { headers }).then((res) => res.data);
   }
 }
