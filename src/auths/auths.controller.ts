@@ -14,7 +14,6 @@ export class AuthController {
     try {
       return this.authService.authorize(req.query);
     } catch (error) {
-      console.log(error);
       return error;
     }
   }

@@ -42,8 +42,6 @@ export class AuthsService {
 
     const { user } = await resp.json();
 
-    log(user.email);
-
     const existingUser = await this.userService.findByEmail(user.email);
 
     if (!existingUser) {

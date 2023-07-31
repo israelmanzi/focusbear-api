@@ -14,4 +14,24 @@ export class PortalsService {
 
     return axios.get(url, { headers }).then((res) => res.data);
   }
+
+  async getWorkspaceTasks({
+    user,
+    workspaceId,
+  }: {
+    user: any;
+    workspaceId: string;
+  }): Promise<any> {
+    const query = new URLSearchParams({ archived: 'false' }).toString();
+
+    const folderUrl = `https://api.clickup.com/api/v2/space/${workspaceId}/folder?${query}`;
+
+    const folders = await fetch(folderUrl, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    }).then((res) => res.json());
+
+    return folders;
+  }
 }
